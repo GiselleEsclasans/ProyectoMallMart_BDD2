@@ -1,12 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types'; // Importa PropTypes
+import PropTypes from 'prop-types'; 
 import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
 const Miniproductcard = ({ product }) => {
-  // Verifica si product está definido
+  
   if (!product) {
-    return null; // O puedes mostrar un mensaje de error
+    return null; 
   }
+
+  const { addToCart } = useCart(); 
+
+    const handleAddToCart = () => {
+        addToCart(product);
+    };
 
   return (
     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg dark:bg-morarosa m-5 border-b-4 border-b-moradooscuro shadow-lg">
@@ -32,7 +39,7 @@ const Miniproductcard = ({ product }) => {
             <span className="text-3xl font-bold text-gray-900 dark:text-white">${product.price}</span>
             <Link onClick={() => {scroll(0, 0)}} to="/carrito">
               {/* Botón de agregar al carrito */}
-              <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-moradooscuro dark:hover:bg-moradoclaro dark:focus:bg-moradoclaro">Agregar al carrito</button>
+              <button onClick={handleAddToCart} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-moradooscuro dark:hover:bg-moradoclaro dark:focus:bg-moradoclaro">Agregar al carrito</button>
             </Link>
           </div>
         </div>

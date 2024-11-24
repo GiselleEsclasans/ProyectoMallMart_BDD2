@@ -8,8 +8,8 @@ export const routes = [
         name: "Productos",
         children: [
             {
-                path: "/productos/producto/:categoId",
-                name: "producto",
+                path: "/productos/producto/:productId",
+                name: "Producto",
             },
         ],
     },

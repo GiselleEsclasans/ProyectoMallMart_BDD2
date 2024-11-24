@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types'; // Importa PropTypes
+import PropTypes from 'prop-types'; 
 import Mediumproductcard from './mediumproductcard';
-import Miniproductcard from './miniproductcard'; // Asegúrate de que la ruta sea correcta
+import Miniproductcard from './miniproductcard'; 
 
 const ProductList = ({ products }, ) => {
   return (
@@ -13,7 +13,7 @@ const ProductList = ({ products }, ) => {
   );
 }
 
-// Define la validación de props
+
 ProductList.propTypes = {
   products: PropTypes.arrayOf(
     PropTypes.shape({

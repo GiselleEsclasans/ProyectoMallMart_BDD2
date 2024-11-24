@@ -1,9 +1,7 @@
-
+import React from 'react';
+import { useAuth } from '../context/AuthContext'; // Asegúrate de que la ruta sea correcta
 import Carrousel from '../components/carrousel';
 import Categoryfooter from '../components/categoryfooter';
-import React from 'react';
-import logo from '../img/foto.png';
-import { Link } from 'react-router-dom';
 import Miniproductcard from '../components/miniproductcard';
 import Mediumproductcard from '../components/mediumproductcard';
 import Rightmediumproductcard from '../components/rightmediumproductcard';
@@ -45,43 +43,50 @@ const products = [
 ];
 
 function HomePage() {
-
+    const { user } = useAuth(); 
 
     return (
         <div className='HomePage'>
-           
-           
-           
             <Carrousel />
-            
-            
-            <div className='R1 p-5'>
-                <span className="text-3xl font-bold text-gray-900 dark:text-moradooscuro p-5">Recomendación General 1</span>
-                <div className="flex flex-wrap">
-                    
-                   
-                    {products.slice(0, 5).map(product => (
-                        <Miniproductcard key={product.productId} product={product} />
-                    ))}
-                    
-                    
-                </div>
+            <span className="text-3xl font-bold text-gray-900 dark:text-moradooscuro p-5">Recomendación General 1</span>
+                    <div className="flex flex-wrap">
+                        {products.slice(0, 5).map(product => (
+                            <Miniproductcard key={product.productId} product={product} />
+                        ))}
+                    </div>
+                    <div className='R2 flex mb-0 '>
+                    <div className='R2_ w-1/2 p-5 pr-10'>
+                        <span className="text-3xl font-bold text-gray-900 dark:text-rojoapagado p-5">Recomendación General 2</span>
+                        <div className="flex flex-wrap">
+                            <ProductList products={products} />
+                        </div>
+                        </div>
+                        <Rightmediumproductcard />
+                    </div>
+                    <Categoryfooter />
+            {user ? ( 
                 
-
-            </div>
-            <div className='R2 flex mb-0 '>
+                <div className='R2 flex mb-0 '>
+                    <Rightmediumproductcard />
                 <div className='R2_ w-1/2 p-5 pr-10'>
-                <span className="text-3xl font-bold text-gray-900 dark:text-rojoapagado p-5">Recomendación General 2</span>
+                    <span className="text-3xl font-bold text-gray-900 dark:text-rojoapagado p-5">Recomendación General 2</span>
+                    
                     <div className="flex flex-wrap">
                         
-                    <ProductList products={products} />
+                        <ProductList products={products} />
                     </div>
                     
+                    </div>
+                    
+                    
                 </div>
-            <Rightmediumproductcard />
-                
-            </div>
-            <Categoryfooter />
+            ) : (
+
+                <div></div>
+              
+            )}
+
+            
         </div>
     );
 }
