@@ -1,15 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types'; // Importa PropTypes
+import PropTypes from 'prop-types'; 
 import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
 const Productformat2 = ({ product }) => {
-  // Verifica si product está definido
+  
   if (!product) {
-    return null; // O puedes mostrar un mensaje de error
+    return null; 
   }
 
-  const totalStars = 5; // Total de estrellas
-  const filledStars = Math.round(product.rating); // Estrellas llenas basadas en la calificación
+  const totalStars = 5; 
+  const filledStars = Math.round(product.rating); 
+
+  const { addToCart } = useCart(); 
+
+  const handleAddToCart = () => {
+      addToCart(product); 
+  };
 
   return (
     <Link onClick={() => {scroll(0, 0)}} to={`/productos/producto/${product.productId}`}>
@@ -32,7 +39,7 @@ const Productformat2 = ({ product }) => {
               <span className="text-3xl font-bold text-gray-900 dark:text-white">${product.price}</span>
             </div>
             <Link onClick={() => {scroll(0, 0)}} to="/carrito">
-              <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-rojoapagado dark:hover:bg-rojoencendido dark:focus:bg-moradoclaro">Agregar al carrito</button>
+              <button onClick={handleAddToCart} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-rojoapagado dark:hover:bg-rojoencendido dark:focus:bg-moradoclaro">Agregar al carrito</button>
             </Link>
           </div>
           <img className="p-8 rounded-t-lg" src={product.image} alt={product.name} />
@@ -42,7 +49,7 @@ const Productformat2 = ({ product }) => {
   );
 }
 
-// Define la validación de props
+
 Productformat2.propTypes = {
   product: PropTypes.shape({
     image: PropTypes.string.isRequired,

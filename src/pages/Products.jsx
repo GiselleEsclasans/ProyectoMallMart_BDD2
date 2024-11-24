@@ -41,7 +41,7 @@ const products = [
 function Products() {
     const [searchTerm, setSearchTerm] = useState('');
 
-    // Filtrar productos basado en el término de búsqueda
+
     const filteredProducts = products.filter(product =>
         product.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -59,7 +59,7 @@ function Products() {
                                 placeholder="Buscar..." 
                                 required 
                                 value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)} // Actualiza el estado al escribir
+                                onChange={(e) => setSearchTerm(e.target.value)}
                             />
                             <button type="submit" className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-morarosa rounded-e-lg border border-morarosa hover:bg-morarosa focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-morarosa dark:hover:bg-moradoclaro dark:focus:ring-moradoclaro">
                                 <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">

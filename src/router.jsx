@@ -24,13 +24,16 @@ export const router = createBrowserRouter([
               element: <Home />,
             },
             {
-                path: routes[1].path,
+                path: routes[1].path, 
                 element: <Products />,
-            },////
+               
+                    
+            
+            },
             {
-                path: routes[1]["children"][0].path,
+                path: routes[1]["children"][0].path, 
                 element: <Product />,
-            },////
+            },
             {
                 path: routes[2].path,
                 element: <Register />,

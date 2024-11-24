@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaShoppingCart, FaUser  } from 'react-icons/fa'; // Importing shopping cart and user icons from react-icons
+import { FaShoppingCart, FaUser  } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 const Rightmediumproductcard = () => {
   return (

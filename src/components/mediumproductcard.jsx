@@ -1,12 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types'; // Importa PropTypes
+import PropTypes from 'prop-types'; 
+import { useCart } from '../context/CartContext';
 
 const Mediumproductcard = ({ product }) => {
-  // Verifica si product está definido
+
   if (!product) {
-    return null; // O puedes mostrar un mensaje de error
+    return null; 
   }
+  
+
+  const { addToCart } = useCart(); 
+
+  const handleAddToCart = () => {
+    if (!user) {
+        // Redirige al usuario a la página de registro si no está autenticado
+        history.push('/registro'); // Cambia '/registro' por la ruta de tu página de registro
+    } else {
+        addToCart(product); // Agrega el producto al carrito si está autenticado
+    }
+};
 
   return (
     <Link onClick={() => {scroll(0, 0)}} to={`/productos/producto/${product.productId}`}>
@@ -32,7 +45,7 @@ const Mediumproductcard = ({ product }) => {
             <span className="text-3xl font-bold text-gray-900 dark:text-white">${product.price}</span>
             <Link onClick={() => {scroll(0, 0)}} to="/carrito">
               {/* Botón de agregar al carrito */}
-              <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-rojoapagado dark:hover:bg-rojoencendido dark:focus:bg-moradoclaro">Agregar al carrito</button>
+              <button onClick={handleAddToCart} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-rojoapagado dark:hover:bg-rojoencendido dark:focus:bg-moradoclaro">Agregar al carrito</button>
             </Link>
           </div>
         </div>
@@ -41,7 +54,7 @@ const Mediumproductcard = ({ product }) => {
   );
 }
 
-// Define la validación de props
+
 Mediumproductcard.propTypes = {
   product: PropTypes.shape({
     image: PropTypes.string.isRequired,
