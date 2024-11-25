@@ -4,6 +4,7 @@ import Categoryfooter from '../components/categoryfooter';
 import Miniproductcard from '../components/miniproductcard';
 import Productcard from '../components/productcard';
 
+
 const products = [
     {
         "image": "url_de_la_imagen.jpg",
@@ -39,6 +40,14 @@ const products = [
     }
 ];
 
+const categories = [
+    "Tecnología",
+    "Electronics",
+    "Sports",
+    "Home"
+];
+
+
 function Product() {
     const { productId } = useParams(); 
 
@@ -64,7 +73,7 @@ function Product() {
             <div className="product flex flex-col md:flex-row justify-center items-center">
                 {}
             </div>
-            <Categoryfooter />
+            <Categoryfooter categories={categories}/>
         </div>
     );
 }

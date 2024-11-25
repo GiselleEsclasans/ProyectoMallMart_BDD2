@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../img/logo2.png';
 import Productformat2 from '../components/Productformat2';
+import Categoryfooter from '../components/categoryfooter';
 
 const products = [
     {
@@ -11,6 +12,8 @@ const products = [
         "name": "Lift Mouse Logitech ",
         "rating": 4.5,
         "description": "Descripción del Producto"
+        
+
     },
     {
         "image": "https://example.com/smartphone.jpg",
@@ -38,13 +41,25 @@ const products = [
     }
 ];
 
+const categories = [
+    "Tecnología",
+    "Electronics",
+    "Sports",
+    "Home"
+];
+
+
+
+
 function Products() {
     const [searchTerm, setSearchTerm] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState(''); // Estado para la categoría seleccionada
 
-
-    const filteredProducts = products.filter(product =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredProducts = products.filter(product => {
+        const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesCategory = selectedCategory ? product.category === selectedCategory : true; // Filtrar por categoría si está seleccionada
+        return matchesSearch && matchesCategory;
+    });
 
     return (
         <div className='Products'>
@@ -65,25 +80,30 @@ function Products() {
                                 <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                                 </svg>
-                                <span className="sr-only">Search</span>
-                            </button>
+                                <span className="sr-only">Search</span></button>
                         </div>
                     </div>
                 </form>
             </div>
             
             <ul className="flex flex-wrap justify-center text-sm font-medium text-center text-gray-500 dark:text-gray-400 m-5">
+                {categories.map(category => (
+                    <li key={category} className="me-2">
+                        <button 
+                            onClick={() => setSelectedCategory(category)} 
+                            className={`inline-block px-4 py-3 rounded-lg ${selectedCategory === category ? 'text-white bg-moradooscuro' : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-morarosa dark:hover:text-white'}`}
+                        >
+                            {category}
+                        </button>
+                    </li>
+                ))}
                 <li className="me-2">
-                    <a href="#" className="inline-block px-4 py-3 text-white bg-moradooscuro rounded-lg active" aria-current="page">Categoría 1</a>
-                </li>
-                <li className="me-2">
-                    <a href="#" className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-morarosa dark:hover:text-white"> Categoría 2</a>
-                </li>
-                <li className="me-2">
-                    <a href="#" className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-morarosa dark:hover:text-white">Categoría 3</a>
-                </li>
-                <li className="me-2">
-                    <a href="#" className="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-morarosa dark:hover:text-white">Categoría 4</a>
+                    <button 
+                        onClick={() => setSelectedCategory('')} 
+                        className={`inline-block px-4 py-3 rounded-lg ${selectedCategory === '' ? 'text-white bg-moradooscuro' : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-morarosa dark:hover:text-white'}`}
+                    >
+                        Todos
+                    </button>
                 </li>
             </ul>
 
@@ -93,16 +113,7 @@ function Products() {
                 ))}
             </div>
 
-            <div className='Category bg-naranjaunimet p-5'>
-                <span className="text-3xl font-bold text-gray-900 dark:text-white m-5">Categorías</span>
-                <div className='flex flex-nowrap justify-between'>
-                    <Link onClick={() => {scroll(0, 0)}} to="/productos" className='border-8 border-white text-orange-950 font-bold py-4 px-4 size-24 rounded-full m-1'></Link>
-                    <Link onClick={() => {scroll(0, 0)}} to="/productos" className='border-8 border-white text-orange-950 font-bold py-4 px-4 size-24 rounded-full m-1'></Link>
-                    <Link onClick={() => {scroll(0, 0)}} to="/productos" className='border-8 border-white text-orange-950 font-bold py-4 px-4 size-24 rounded-full m-1'></Link>
-                    <Link onClick={() => {scroll(0, 0)}} to="/productos" className='border-8 border-white text-orange-950 font-bold py-4 px-4 size-24 rounded-full m-1'></Link>
-                    <Link onClick={() => {scroll(0, 0)}} to="/productos" className='border-8 border-white text-orange-950 font-bold py-4 px-4 size-24 rounded-full m-1'></Link>
-                </div>
-            </div>
+            <Categoryfooter categories={categories}/>
         </div>
     );
 }

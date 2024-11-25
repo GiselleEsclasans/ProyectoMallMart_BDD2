@@ -42,6 +42,14 @@ const products = [
     }
 ];
 
+const categories = [
+    "Tecnología",
+    "Electronics",
+    "Sports",
+    "Home"
+];
+
+
 function HomePage() {
     const { user } = useAuth(); 
 
@@ -63,7 +71,8 @@ function HomePage() {
                         </div>
                         <Rightmediumproductcard />
                     </div>
-                    <Categoryfooter />
+
+                    <Categoryfooter categories={categories}/>
             {user ? ( 
                 
                 <div className='R2 flex mb-0 '>
