@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Mediumproductcard from './mediumproductcard';
 import Miniproductcard from './miniproductcard'; 
 
-const ProductList = ({ products }, ) => {
+const ProductList = ({ products }) => {
   return (
     <div className="flex flex-wrap justify-center">
       {products.map(product => (
@@ -12,7 +12,6 @@ const ProductList = ({ products }, ) => {
     </div>
   );
 }
-
 
 ProductList.propTypes = {
   products: PropTypes.arrayOf(

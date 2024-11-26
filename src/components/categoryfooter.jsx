@@ -7,18 +7,16 @@ const Categoryfooter = ({ categories }) => {
     <div className='Category bg-naranjaunimet p-5 pl-2'>
       <span className="text-3xl font-bold text-gray-900 dark:text-white m-5">Categorías</span>
       <div className='flex flex-nowrap justify-between'>
-      
-          {categories.map((category, index) => (
+          {categories.map((category) => (
             <Link 
-              key={index}
+              key={category.categoryId} 
               onClick={() => { window.scrollTo(0, 0); }} 
-              to="/productos" 
+              to={`/productos/${category.categoryId}`} // Asegúrate de que el enlace sea correcto
               className='border-8 border-white text-orange-950 font-bold py-4 px-4 size-24 rounded-full m-1'
             >
-              {category}
+              {category.name}
             </Link>
-          ))
-        }
+          ))}
       </div>
     </div>
   );
@@ -26,7 +24,10 @@ const Categoryfooter = ({ categories }) => {
 
 // Definición de PropTypes
 Categoryfooter.propTypes = {
-  categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+  categories: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    categoryId: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default Categoryfooter;
