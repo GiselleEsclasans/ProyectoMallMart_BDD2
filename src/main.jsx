@@ -7,6 +7,7 @@ import { AuthProvider } from './context/AuthContext.jsx';
 import { CartProvider } from './context/CartContext'; 
 import { router } from './router.jsx';
 
+
 ReactDOM.createRoot(document.getElementById('root')).render(
     <AuthProvider>
         <CartProvider> 

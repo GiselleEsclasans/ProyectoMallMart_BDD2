@@ -19,7 +19,7 @@ const Productformat2 = ({ product }) => {
   };
 
   return (
-    <Link onClick={() => {scroll(0, 0)}} to={`/productos/producto/${product.productId}`}>
+    <Link onClick={() => {scroll(0, 0)}} to={`/productos/${product.categoryID}/producto/${product.productId}`}>
       <div className="w-30 bg-white border border-gray-200 rounded-lg dark:bg-rose-300 m-5 border-b-4 border-b-rojoapagado shadow-lg p-5">
         <div className="px-5 pb-5 flex items-center justify-between">
           <div>
@@ -43,6 +43,7 @@ const Productformat2 = ({ product }) => {
             </Link>
           </div>
           <img className="p-8 rounded-t-lg" src={product.image} alt={product.name} />
+
         </div>
       </div>
     </Link>
@@ -52,6 +53,7 @@ const Productformat2 = ({ product }) => {
 
 Productformat2.propTypes = {
   product: PropTypes.shape({
+    categoryID: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     productId: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,

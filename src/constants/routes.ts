@@ -4,11 +4,11 @@ export const routes = [
         name: "Inicio",
     },
     {
-        path: "/productos",
+        path: "/productos/:productsId",
         name: "Productos",
         children: [
             {
-                path: "/productos/producto/:productId",
+                path: "/productos/:productsId/producto/:productId",
                 name: "Producto",
             },
         ],
