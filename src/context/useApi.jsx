@@ -32,7 +32,7 @@ function useApi() {
                 throw new Error('Error en la respuesta de la API');
             }
             const result = await response.json();
-            console.log(result);
+            //console.log(result);
             
             setCategories(result); // Actualiza el estado con las categorías
         } catch (err) {
@@ -43,7 +43,7 @@ function useApi() {
     };
 
     useEffect(() => {
-        console.log("Fetching products and categories...");
+        
         getProducts();
         getCategories();
     }, []); 
