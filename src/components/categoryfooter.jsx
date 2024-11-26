@@ -12,7 +12,7 @@ const Categoryfooter = ({ categories }) => {
               key={category.categoryId} 
               onClick={() => { window.scrollTo(0, 0); }} 
               to={`/productos/${category.categoryId}`} // Asegúrate de que el enlace sea correcto
-              className='border-8 border-white text-orange-950 font-bold py-4 px-4 size-24 rounded-full m-1'
+              className='border-8 bg-white border-moradoclaro text-orange-950 font-bold py-8 px-3 size-28 rounded-full m-1'
             >
               {category.name}
             </Link>
