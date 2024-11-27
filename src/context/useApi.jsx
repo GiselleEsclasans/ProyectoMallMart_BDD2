@@ -2,22 +2,22 @@ import { useState, useEffect } from 'react';
 
 const API_URL = 'https://backend-mallmart-bd2-production.up.railway.app/api';
 
-function useApi() {
+function useApi(categoryId) {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-
     const getProducts = async () => {
+        setLoading(true); // Asegúrate de que loading sea true al iniciar la carga
         try {
-            const response = await fetch(`${API_URL}/products/all`);
+            const url = categoryId ? `${API_URL}/products/categoryID/${categoryId}` : `${API_URL}/products/all`;
+            const response = await fetch(url);
             if (!response.ok) {
                 throw new Error('Error en la respuesta de la API');
             }
             const result = await response.json();
             setProducts(result);
-            
         } catch (err) {
             setError(err.message); 
         } finally {
@@ -32,21 +32,16 @@ function useApi() {
                 throw new Error('Error en la respuesta de la API');
             }
             const result = await response.json();
-            //console.log(result);
-            
             setCategories(result);
         } catch (err) {
             setError(err.message); 
-        } finally {
-            setLoading(false); 
         }
     };
 
     useEffect(() => {
-        
-        getProducts();
-        getCategories();
-    }, []); 
+        getCategories(); // Cargar categorías una vez
+        getProducts(); // Cargar productos según la categoría
+    }, [categoryId]); // Dependencia de categoryId
 
     return { products, categories, loading, error };
 }
