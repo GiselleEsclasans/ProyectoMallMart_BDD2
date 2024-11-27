@@ -39,7 +39,9 @@ const Mediumproductcard = ({ product }) => {
             {/* Precio del producto */}
             <span className="text-3xl font-bold text-gray-900 dark:text-white">${product.price}</span>
             {/* Botón de agregar al carrito */}
+            <Link onClick={() => {scroll(0, 0)}} to="/carrito">
             <button onClick={handleAddToCart} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-rojoapagado dark:hover:bg-rojoencendido dark:focus:bg-moradoclaro">Agregar al carrito</button>
+            </Link>
           </div>
         </div> </Link>
     </div>

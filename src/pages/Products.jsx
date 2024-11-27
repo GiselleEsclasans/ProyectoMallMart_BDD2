@@ -3,30 +3,30 @@ import { useParams } from 'react-router-dom';
 import Productformat2 from '../components/Productformat2';
 import Categoryfooter from '../components/categoryfooter';
 import { Link } from 'react-router-dom';
-import useApi from '../context/useApi'; // Asegúrate de que esta ruta sea correcta
+import useApi from '../context/useApi'; 
 
 function Products() {
-    const { products, categories, loading, error } = useApi(); // Usa el hook useApi
-    const { categoryId } = useParams(); // Obtén el categoryId de la URL
+    const { products, categories, loading, error } = useApi(); 
+    const { categoryId } = useParams(); 
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState(categoryId || '');
 
     useEffect(() => {
-        setSelectedCategory(categoryId); // Actualiza el estado cuando cambie el categoryId
+        setSelectedCategory(categoryId); 
     }, [categoryId]);
 
     if (loading) {
-        return <div>Cargando productos...</div>; // Mensaje de carga
+        return <div>Cargando productos...</div>; 
     }
 
     if (error) {
-        console.error("Error en la carga de productos:", error); // Muestra el error en la consola
-        return <div>Error: {error}</div>; // Mensaje de error
+        console.error("Error en la carga de productos:", error); 
+        return <div>Error: {error}</div>; 
     }
-    // Filtrar productos por categoría seleccionada
+   
     const filteredProducts = products.filter(product => {
         const matchesSearchTerm = product.name.toLowerCase().includes(searchTerm.toLowerCase());
-        const matchesCategory = selectedCategory ? product.categoryID === selectedCategory : true; // Asegúrate de que cada producto tenga un campo categoryId
+        const matchesCategory = selectedCategory ? product.categoryID === selectedCategory : true; 
         return matchesSearchTerm && matchesCategory;
     });
 

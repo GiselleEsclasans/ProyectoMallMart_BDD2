@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext'; // Asegúrate de importar el contexto
+import { useAuth } from '../context/AuthContext'; 
 
 const Logincard = () => {
-    const { login } = useAuth(); // Obtén la función de inicio de sesión
+    const { login } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Evita el comportamiento por defecto del formulario
-        setError(''); // Resetea el error
+        e.preventDefault(); 
+        setError(''); 
 
         try {
-            await login(email, password); // Llama a la función de inicio de sesión
-            // Redirige o realiza alguna acción después de iniciar sesión
+            await login(email, password); 
+            
         } catch (err) {
-            setError(err.message); // Muestra el error si ocurre
+            setError(err.message);
         }
     };
 
@@ -48,7 +48,7 @@ const Logincard = () => {
                             name="password" 
                             required 
                             value={password}
-                            onChange={(e) => setPassword(e.target.value)} // Actualiza el estado
+                            onChange={(e) => setPassword(e.target.value)}
                             className="mt-1 mb-12 block w-full border rounded-full bg-gray-100 border-gray-300 p-2 focus:ring-violetaclaro focus:border-violetaclaro" 
                             placeholder="Contraseña" 
                         />

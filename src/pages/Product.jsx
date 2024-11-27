@@ -40,7 +40,7 @@ function Product() {
             <div className="product flex flex-col md:flex-row justify-center items-center">
                 {}
             </div>
-            <Categoryfooter categories={categories}/>
+            <Categoryfooter categories={categories} />
         </div>
     );
 }

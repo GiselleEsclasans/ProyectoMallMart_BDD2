@@ -5,10 +5,10 @@ import ProductcardOnCart from '../components/ProductcardOnCart';
 function Cart() {
     const { cart, purchase } = useCart();
 
-    // Calcular el costo total
+
     const totalCost = cart.reduce((total, item) => total + (item.product.price * item.quantity), 0);
 
-    // Calcular la cantidad total de productos
+
     const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
     return (

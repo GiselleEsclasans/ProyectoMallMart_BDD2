@@ -11,7 +11,7 @@ const Categoryfooter = ({ categories }) => {
             <Link 
               key={category.categoryId} 
               onClick={() => { window.scrollTo(0, 0); }} 
-              to={`/productos/${category.categoryId}`} // Asegúrate de que el enlace sea correcto
+              to={`/productos/${category.categoryId}`} 
               className='border-8 border-white text-orange-950 font-bold py-4 px-4 size-24 rounded-full m-1'
             >
               {category.name}

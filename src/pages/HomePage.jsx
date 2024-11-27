@@ -1,23 +1,23 @@
 import React from 'react';
-import { useAuth } from '../context/AuthContext'; // Asegúrate de que la ruta sea correcta
+import { useAuth } from '../context/AuthContext'; 
 import Carrousel from '../components/carrousel';
 import Categoryfooter from '../components/categoryfooter';
 import Miniproductcard from '../components/miniproductcard';
 import Rightmediumproductcard from '../components/rightmediumproductcard';
 import ProductList from '../components/ProductList';
-import useApi from '../context/useApi'; // Asegúrate de que esta ruta sea correcta
+import useApi from '../context/useApi';
 
 function HomePage() {
     const { user } = useAuth(); 
-    const { products, categories, loading, error } = useApi(); // Usa el hook useApi
+    const { products, categories, loading, error } = useApi(); 
 
     if (loading) {
-        return <div>Cargando productos...</div>; // Mensaje de carga
+        return <div>Cargando productos...</div>;
     }
 
     if (error) {
-        console.error("Error en la carga de productos:", error); // Muestra el error en la consola
-        return <div>Error: {error}</div>; // Mensaje de error
+        console.error("Error en la carga de productos:", error); 
+        return <div>Error: {error}</div>; 
     }
 
     return (
@@ -41,7 +41,7 @@ function HomePage() {
 
             <Categoryfooter categories={categories} />
 
-            {user && ( // Renderiza solo si el usuario está autenticado
+            {user && ( 
                 <div className='R2 flex mb-0 '>
                     <Rightmediumproductcard />
                     <div className='R2_ w-1/2 p-5 pr-10'>

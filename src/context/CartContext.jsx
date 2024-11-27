@@ -1,19 +1,18 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useAuth } from './AuthContext'; 
 
-// Crear el contexto
 const CartContext = createContext();
 
-// Proveedor del contexto
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
-    const userEmail = localStorage.getItem('userEmail'); 
+    const { user } = useAuth(); 
 
-
+  
     useEffect(() => {
         const fetchCart = async () => {
-            if (userEmail) {
+            if (user) {
                 try {
-                    const response = await fetch(`https://backend-mallmart-bd2-production.up.railway.app/api/cart/${userEmail}`);
+                    const response = await fetch(`https://backend-mallmart-bd2-production.up.railway.app/api/cart/${user.email}`);
                     if (!response.ok) {
                         throw new Error('Error al cargar el carrito');
                     }
@@ -26,7 +25,7 @@ export const CartProvider = ({ children }) => {
         };
 
         fetchCart();
-    }, [userEmail]);
+    }, [user]);  
 
     const addToCart = async (product) => {
         setCart(prevCart => {
@@ -42,19 +41,19 @@ export const CartProvider = ({ children }) => {
             }
         });
 
-     
         await fetch(`https://backend-mallmart-bd2-production.up.railway.app/api/products/addToCart`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ userEmail, product }), 
+            body: JSON.stringify({ userEmail: user.email, product }), 
         });
     };
 
     const removeFromCart = async (productId) => {
         setCart(prevCart => prevCart.filter(item => item.product.productId !== productId));
 
+    
     };
 
     const updateQuantity = async (productId, quantity) => {
@@ -66,8 +65,8 @@ export const CartProvider = ({ children }) => {
             );
         });
 
-      
-        await fetch(`https://backend-mallmart-bd2-production.up.railway.app/api/cart/${userEmail}`, {
+ 
+        await fetch(`https://backend-mallmart-bd2-production.up.railway.app/api/cart/${user.email}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -78,7 +77,7 @@ export const CartProvider = ({ children }) => {
 
     const purchase = async () => {
         try {
-            const response = await fetch(`https://backend-mallmart-bd2-production.up.railway.app/api/cart/purchase/${userEmail}`, {
+            const response = await fetch(`https://backend-mallmart-bd2-production.up.railway.app/api/cart/purchase/${user.email}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -102,7 +101,7 @@ export const CartProvider = ({ children }) => {
         <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, purchase }}>
             {children}
         </CartContext.Provider>
- );
+    );
 };
 
 export const useCart = () => {
