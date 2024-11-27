@@ -4,22 +4,11 @@ import { Link } from 'react-router-dom';
 
 function Account() {
     const { user, profileData, fetchProfileData, logout } = useAuth();
+    const storedUser  = localStorage.getItem('email');
+    const storedName = localStorage.getItem('name');
+    const storedAddress = localStorage.getItem('address');
+
     
-
-    useEffect(() => {
-        const getEmailFromLocalStorage = () => {
-            const storedUser  = localStorage.getItem('email');
-            
-        
-            return storedUser; 
-        };
-
-        const email = getEmailFromLocalStorage();
-        if (email) {
-           
-            fetchProfileData(email); 
-        }
-    }, [fetchProfileData]);
 
     const handleLogout = () => {
         logout(); 
@@ -34,9 +23,10 @@ function Account() {
                         {/* Aquí puedes agregar una imagen de perfil si la tienes */}
                     </div>
                     <div className="ml-10">
-                        <p className="text-5xl text-black font-semibold">{profileData?.firstName || user?.firstName || 'Usuario'}</p>
-                        <p className="text-3xl text-black font-semibold">{profileData?.lastName || user?.lastName || ''}</p>
-                        <p className="text-lg text-black">{profileData?.email || user?.email || ''}</p>
+                        <p className="text-3xl text-black font-semibold">{storedName}</p>
+                        <p className="text-3xl text-black font-semibold">Correo: {storedUser}</p>
+                        <p className="text-3xl text-black font-semibold"> {storedAddress}</p>
+                        
                     </div>
                 </div>
                 <Link onClick={() => {scroll(0, 0)}} to="/">
