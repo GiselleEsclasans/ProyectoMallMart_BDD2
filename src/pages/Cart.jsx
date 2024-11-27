@@ -1,8 +1,10 @@
 import React from 'react';
 import { useCart } from '../context/CartContext'; 
-import ProductcardOnCart from '../components/ProductcardOnCart';
+import ProductcardOnCart from '../components/productcardOnCart';
 
 function Cart() {
+
+
     const { cart, purchase } = useCart();
 
 
