@@ -29,7 +29,7 @@ export const CartProvider = ({ children }) => {
               
                     setCart(data || []); 
                     localStorage.setItem('cart', JSON.stringify(data || []));
-                    console.log("carro: ", data);
+                    //console.log("carro: ", data);
                 } catch (error) {
                     console.error('Error al cargar el carrito:', error);
                 }

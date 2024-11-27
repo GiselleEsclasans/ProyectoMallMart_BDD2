@@ -10,7 +10,8 @@ import Rightmediumproductcard2 from '../components/rightmediumproductcard2';
 
 function HomePage() {
     const { user } = useAuth(); 
-    const { products, categories, loading, error } = useApi(); 
+    const storedEmail = localStorage.getItem('email');
+    const { products, categories, recommendations, loading, error } = useApi(null, storedEmail); 
 
     if (loading) {
         return <div>Cargando productos...</div>;
@@ -21,20 +22,31 @@ function HomePage() {
         return <div>Error: {error}</div>; 
     }
 
+    // Dividir los productos en dos partes
+    const firstFiveProducts = products.slice(0, 5);
+    const nextFiveProducts = products.slice(5, 10);
+
     return (
         <div className='HomePage'>
             <Carrousel />
-            <span className="text-3xl font-bold text-gray-900 dark:text-moradooscuro p-5 ">Recomendación General 1</span>
+            <span className="text-3xl font-bold text-gray-900 dark:text-moradooscuro p-5 ">
+                {user ? "Recomendaciones sólo para tí" : "Nuestros Productos"}
+            </span>
             <div className="flex flex-wrap">
-                {products.slice(0, 5).map(product => (
-                    <Miniproductcard key={product.productId} product={product} />
-                ))}
+                {user && recommendations.length > 0 
+                    ? recommendations.slice(0, 5).map(recommendation => (
+                        <Miniproductcard key={recommendation.productId} product={recommendation} />
+                    ))
+                    : firstFiveProducts.map(product => (
+                        <Miniproductcard key={product.productId} product={product} />
+                    ))
+                }
             </div>
             <div className='R2 flex mb-0 '>
                 <div className='R2_ w-1/2 p-5 pr-10'>
-                    <span className="text-3xl font-bold text-gray-900 dark:text-rojoapagado p-5">Recomendación General 2</span>
+                    <span className="text-3xl font-bold text-gray-900 dark:text-rojoapagado p-5">Nuestros Productos</span>
                     <div className="flex flex-wrap">
-                        <ProductList products={products} />
+                        <ProductList products={firstFiveProducts} />
                     </div>
                 </div>
                 <Rightmediumproductcard />
@@ -46,9 +58,9 @@ function HomePage() {
                 <div className=' bg-naranjaunimet R2 flex mb-0 '>
                     <Rightmediumproductcard2 />
                     <div className='R2_ w-1/2 border-t-8  bg-white border-naranjaunimet rounded-b-none rounded-xl p-5 pr-10'>
-                        <span className="text-3xl font-bold text-gray-900 dark:text-rojoapagado p-5">Recomendación General 2</span>
+                        <span className="text-3xl font-bold text-gray-900 dark:text-rojoapagado p-5">Nuestros Productos</span>
                         <div className="flex flex-wrap">
-                            <ProductList products={products} />
+                            <ProductList products={nextFiveProducts} />
                         </div>
                     </div>
                 </div>
