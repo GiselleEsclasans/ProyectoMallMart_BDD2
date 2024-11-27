@@ -3,6 +3,8 @@ import { useCart } from '../context/CartContext';
 import ProductcardOnCart from '../components/ProductcardOnCart';
 
 function Cart() {
+
+    
     const { cart, purchase } = useCart();
 
 
