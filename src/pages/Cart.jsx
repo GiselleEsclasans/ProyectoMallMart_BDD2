@@ -9,6 +9,7 @@ function Cart() {
     const totalCost = cart.reduce((total, item) => {
         const product = item[0]; 
         const quantity = item[1]; 
+        
         if (product && product.price) {
             return total + (product.price * quantity);
         }
@@ -17,6 +18,7 @@ function Cart() {
 
     const totalQuantity = cart.reduce((total, item) => {
         const quantity = item[1]; 
+        
         if (quantity) {
             return total + quantity;
         }
