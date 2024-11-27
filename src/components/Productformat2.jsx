@@ -42,7 +42,7 @@ const Productformat2 = ({ product }) => {
               <button onClick={handleAddToCart} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-rojoapagado dark:hover:bg-rojoencendido dark:focus:bg-moradoclaro">Agregar al carrito</button>
             </Link>
           </div>
-          <img className="p-8 rounded-t-lg" src={product.image} alt={product.name} />
+          <img className="p-8 w-96  bg-white rounded-xl" src={product.image} alt={product.name} />
 
         </div>
       </div>
