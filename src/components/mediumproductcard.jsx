@@ -18,7 +18,7 @@ const Mediumproductcard = ({ product }) => {
   };
 
   return (
-    <div className="w-30 bg-white border border-gray-200 rounded-lg dark:bg-rose-300 m-5 border-b-4 border-b-rojoapagado shadow-lg">
+    <div className="w-30 max-w-lg bg-white border border-gray-200 rounded-lg dark:bg-rose-300 m-5 border-b-4 border-b-rojoapagado shadow-lg">
       <Link onClick={() => {scroll(0, 0)}} to={`/productos/${product.categoryID}/producto/${product.productId}`}>
         {/* Foto del producto */}
         <img className="p-8 w-full bg-white " src={product.image} alt={product.name} />
