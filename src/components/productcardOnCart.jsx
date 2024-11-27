@@ -7,7 +7,8 @@ const ProductcardOnCart = ({ item }) => {
     return null; 
   }
 
-  const { product, quantity } = item; 
+  const product = item[0]; // El primer elemento es el objeto del producto
+  const quantity = item[1]; // El segundo elemento es la cantidad
   const { removeFromCart, updateQuantity } = useCart();
 
   const handleQuantityChange = (e) => {
@@ -34,23 +35,30 @@ const ProductcardOnCart = ({ item }) => {
         />
         <span className="text-3xl font-bold text-gray-900 dark:text-white">${(product.price * quantity).toFixed(2)}</span>
       </div>
+      {/* Si ya no necesitas mostrar el email y la fecha, puedes eliminar esta sección */}
+      {/* <div className="text-sm text-gray-500">
+        <p>Email del usuario: {userEmail}</p>
+        <p>Fecha añadida: {dateAdded}</p>
+      </div> */}
     </div>
   );
 }
 
-
 ProductcardOnCart.propTypes = {
-  item: PropTypes.shape({
-    product: PropTypes.shape({
-      image: PropTypes.string.isRequired,
-      productId: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-      description: PropTypes.string.isRequired,
-    }).isRequired,
-    quantity: PropTypes.number.isRequired,
-  }).isRequired,
+  item: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.shape({
+        image: PropTypes.string.isRequired,
+        productId: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        rating: PropTypes.number.isRequired,
+        description: PropTypes.string.isRequired,
+        categoryID: PropTypes.string.isRequired,
+      }).isRequired,
+      PropTypes.number.isRequired,
+    ])
+  ).isRequired,
 };
 
 export default ProductcardOnCart;
