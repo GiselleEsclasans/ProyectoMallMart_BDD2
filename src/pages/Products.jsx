@@ -7,13 +7,16 @@ import useApi from '../context/useApi';
 
 function Products() {
     const { products, categories, loading, error } = useApi(); 
-    const { categoryId } = useParams(); 
+    const { productsId } = useParams(); 
     const [searchTerm, setSearchTerm] = useState('');
-    const [selectedCategory, setSelectedCategory] = useState(categoryId || '');
+    const [selectedCategory, setSelectedCategory] = useState(productsId || '');
+    
 
     useEffect(() => {
-        setSelectedCategory(categoryId); 
-    }, [categoryId]);
+      
+        console.log(productsId);
+        setSelectedCategory(productsId); 
+    }, [productsId]);
 
     if (loading) {
         return <div>Cargando productos...</div>; 

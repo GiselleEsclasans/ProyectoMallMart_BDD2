@@ -16,8 +16,8 @@ function HomePage() {
     const [selectedCategory, setSelectedCategory] = useState('');
 
     useEffect(() => {
-        // Resetea la categoría seleccionada cuando se cargan los productos
         setSelectedCategory('');
+        
     }, [products]);
 
     if (loading) {
@@ -29,12 +29,12 @@ function HomePage() {
         return <div>Error: {error}</div>; 
     }
 
-    // Filtrar productos según la categoría seleccionada
+
     const filteredProducts = selectedCategory 
         ? products.filter(product => product.categoryID === selectedCategory) 
         : products;
 
-    // Dividir los productos filtrados en dos partes
+
     const firstFiveProducts = filteredProducts.slice(0, 5);
     const nextFiveProducts = filteredProducts.slice(5, 10);
 
@@ -55,7 +55,6 @@ function HomePage() {
                 }
             </div>
                 
-
             <div className='R2 flex mb-0 '>
                 <div className='R2_ w-1/2 p-5 pr-10'>
                     <span className="text-3xl font-bold text-gray-900 dark:text-rojoapagado p-5">Nuestros Productos</span>

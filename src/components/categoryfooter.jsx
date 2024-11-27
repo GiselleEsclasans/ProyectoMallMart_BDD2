@@ -14,7 +14,7 @@ const Categoryfooter = ({ categories, onSelectCategory }) => {
                 window.scrollTo(0, 0); 
                 onSelectCategory(category.categoryId); 
               }} 
-              to={`/productos/${category.categoryId}`} 
+              to={`/productos/${category.categoryId}`} // Solo redirige a la página de productos
               className='border-8 border-moradoclaro bg-white text-orange-950 font-bold py-4 px-4 rounded-full m-1'
             >
               {category.name}
