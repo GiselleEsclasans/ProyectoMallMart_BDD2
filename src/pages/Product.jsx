@@ -31,7 +31,7 @@ function Product() {
             <span className="text-3xl font-bold text-gray-900 dark:text-moradooscuro p-5">Producto</span>
             <Productcard product={product} /> {}
             <div></div>
-            <span className="text-3xl font-bold text-gray-900 dark:text-moradooscuro p-5">Recomendación Según la compra</span>
+            <span className="text-3xl font-bold text-gray-900 dark:text-moradooscuro p-5">Otros Productos</span>
             <div className="flex flex-wrap">
                 {products.slice(0, 5).map(p => (
                     <Miniproductcard key={p.productId} product={p} />

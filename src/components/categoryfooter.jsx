@@ -12,7 +12,7 @@ const Categoryfooter = ({ categories, onSelectCategory }) => {
               key={category.categoryId} 
               onClick={() => { 
                 window.scrollTo(0, 0); 
-                onSelectCategory(category.categoryId); // Llamar a la función para actualizar la categoría seleccionada
+                onSelectCategory(category.categoryId); 
               }} 
               to={`/productos/${category.categoryId}`} 
               className='border-8 border-moradoclaro bg-white text-orange-950 font-bold py-4 px-4 rounded-full m-1'
@@ -30,7 +30,7 @@ Categoryfooter.propTypes = {
     name: PropTypes.string.isRequired,
     categoryId: PropTypes.string.isRequired,
   })).isRequired,
-  onSelectCategory: PropTypes.func.isRequired, // Prop para la función de selección de categoría
+  onSelectCategory: PropTypes.func.isRequired, 
 };
 
 export default Categoryfooter;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext'; 
 import Carrousel from '../components/carrousel';
 import Categoryfooter from '../components/categoryfooter';
@@ -13,6 +13,13 @@ function HomePage() {
     const storedEmail = localStorage.getItem('email');
     const { products, categories, recommendations, loading, error } = useApi(null, storedEmail); 
 
+    const [selectedCategory, setSelectedCategory] = useState('');
+
+    useEffect(() => {
+        // Resetea la categoría seleccionada cuando se cargan los productos
+        setSelectedCategory('');
+    }, [products]);
+
     if (loading) {
         return <div>Cargando productos...</div>;
     }
@@ -22,9 +29,14 @@ function HomePage() {
         return <div>Error: {error}</div>; 
     }
 
-    // Dividir los productos en dos partes
-    const firstFiveProducts = products.slice(0, 5);
-    const nextFiveProducts = products.slice(5, 10);
+    // Filtrar productos según la categoría seleccionada
+    const filteredProducts = selectedCategory 
+        ? products.filter(product => product.categoryID === selectedCategory) 
+        : products;
+
+    // Dividir los productos filtrados en dos partes
+    const firstFiveProducts = filteredProducts.slice(0, 5);
+    const nextFiveProducts = filteredProducts.slice(5, 10);
 
     return (
         <div className='HomePage'>
@@ -42,6 +54,8 @@ function HomePage() {
                     ))
                 }
             </div>
+                
+
             <div className='R2 flex mb-0 '>
                 <div className='R2_ w-1/2 p-5 pr-10'>
                     <span className="text-3xl font-bold text-gray-900 dark:text-rojoapagado p-5">Nuestros Productos</span>
@@ -52,7 +66,13 @@ function HomePage() {
                 <Rightmediumproductcard />
             </div>
 
-            <Categoryfooter categories={categories} />
+            <Categoryfooter 
+                categories={categories} 
+                onSelectCategory={(categoryId) => {
+                    setSelectedCategory(categoryId);
+                    window.scrollTo(0, 0); 
+                }} 
+            />
 
             {user && ( 
                 <div className=' bg-naranjaunimet R2 flex mb-0 '>
