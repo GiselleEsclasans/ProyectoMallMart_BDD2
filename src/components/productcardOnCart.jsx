@@ -9,7 +9,7 @@ const ProductcardOnCart = ({ item }) => {
 
     const product = item[0];
     const quantity = item[1];
-    const { removeFromCart, addToCart } = useCart();
+    const {  addToCart } = useCart();
 
     const handleIncrement = () => {
         if (quantity < 10) {
