@@ -39,7 +39,7 @@ export const CartProvider = ({ children }) => {
         fetchCart();
     }, [user]);  
 
-    const addToCart = async (product) => {
+    const addToCart = async (product, quantity) => {
         const storedEmail = localStorage.getItem('email');
         
         
@@ -47,6 +47,8 @@ export const CartProvider = ({ children }) => {
             console.error('Producto inválido:', product);
             return; 
         }
+
+        console.log('Paso');
     
         setCart(prevCart => {
             const existingProductIndex = prevCart.findIndex(item => item[0].productId === product.productId);
@@ -55,7 +57,7 @@ export const CartProvider = ({ children }) => {
                 
                 const newCart = prevCart.map((item, index) => 
                     index === existingProductIndex 
-                        ? [item[0], item[1] + 1] 
+                        ? [item[0], item[1] + quantity] 
                         : item
                 );
     
@@ -79,6 +81,7 @@ export const CartProvider = ({ children }) => {
             body: JSON.stringify({
                 userEmail: storedEmail,
                 productId: product.productId,
+                quantity: quantity,
                 dateAdded: new Date().toISOString().split('T')[0] 
             }), 
         });

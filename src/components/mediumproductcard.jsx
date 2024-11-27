@@ -19,7 +19,8 @@ const Mediumproductcard = ({ product }) => {
   const handleAddToCart = (e) => {
     e.preventDefault(); 
     if (user) {
-      addToCart(product); 
+      console.log(product.productId);
+      addToCart(product, 1); 
       navigate('/carrito'); 
     } else {
       

@@ -15,7 +15,7 @@ const Productcard = ({ product }) => {
     const handleAddToCart = (e) => {
         e.preventDefault(); 
         if (user) {
-            addToCart(product); 
+            addToCart(product, 1); 
             navigate('/carrito'); 
         } else {
            
