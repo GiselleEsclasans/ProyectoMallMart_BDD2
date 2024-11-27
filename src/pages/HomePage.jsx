@@ -6,6 +6,7 @@ import Miniproductcard from '../components/miniproductcard';
 import Rightmediumproductcard from '../components/rightmediumproductcard';
 import ProductList from '../components/ProductList';
 import useApi from '../context/useApi';
+import Rightmediumproductcard2 from '../components/rightmediumproductcard2';
 
 function HomePage() {
     const { user } = useAuth(); 
@@ -43,7 +44,7 @@ function HomePage() {
 
             {user && ( 
                 <div className='R2 flex mb-0 '>
-                    <Rightmediumproductcard />
+                    <Rightmediumproductcard2 />
                     <div className='R2_ w-1/2 p-5 pr-10'>
                         <span className="text-3xl font-bold text-gray-900 dark:text-rojoapagado p-5">Recomendación General 2</span>
                         <div className="flex flex-wrap">
