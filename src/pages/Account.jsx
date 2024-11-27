@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom';
 
 function Account() {
     const { user, profileData, fetchProfileData, logout } = useAuth();
+    
 
     useEffect(() => {
         const getEmailFromLocalStorage = () => {
-            const storedUser  = localStorage.getItem('user');
+            const storedUser  = localStorage.getItem('email');
+            
         
             return storedUser; 
         };

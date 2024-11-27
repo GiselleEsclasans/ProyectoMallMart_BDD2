@@ -7,17 +7,22 @@ export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
     const { user } = useAuth(); 
 
-  
     useEffect(() => {
+        
         const fetchCart = async () => {
-            if (user) {
+            // Obtener el correo electrónico del localStorage
+            const storedEmail = localStorage.getItem('email');
+            
+            if (storedEmail) {
                 try {
-                    const response = await fetch(`https://backend-mallmart-bd2-production.up.railway.app/api/cart/${user.email}`);
+                    const response = await fetch(`https://backend-mallmart-bd2-production.up.railway.app/api/cart/${storedEmail}`);
                     if (!response.ok) {
                         throw new Error('Error al cargar el carrito');
                     }
                     const data = await response.json();
-                    setCart(data.cart); 
+                    
+                    setCart(data || []); 
+                    console.log("carro: " + data);
                 } catch (error) {
                     console.error('Error al cargar el carrito:', error);
                 }
@@ -41,19 +46,20 @@ export const CartProvider = ({ children }) => {
             }
         });
 
+        // Obtener el correo electrónico del localStorage
+        const storedEmail = localStorage.getItem('email');
         await fetch(`https://backend-mallmart-bd2-production.up.railway.app/api/products/addToCart`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ userEmail: user.email, product }), 
+            body: JSON.stringify({ userEmail: storedEmail, product }), 
         });
     };
 
     const removeFromCart = async (productId) => {
         setCart(prevCart => prevCart.filter(item => item.product.productId !== productId));
-
-    
+        // Aquí podrías hacer una llamada a la API para eliminar el producto del carrito si es necesario
     };
 
     const updateQuantity = async (productId, quantity) => {
@@ -65,8 +71,9 @@ export const CartProvider = ({ children }) => {
             );
         });
 
- 
-        await fetch(`https://backend-mallmart-bd2-production.up.railway.app/api/cart/${user.email}`, {
+        // Obtener el correo electrónico del localStorage
+        const storedEmail = localStorage.getItem('email');
+        await fetch(`https://backend-mallmart-bd2-production.up.railway.app/api/cart/${storedEmail}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -77,7 +84,8 @@ export const CartProvider = ({ children }) => {
 
     const purchase = async () => {
         try {
-            const response = await fetch(`https://backend-mallmart-bd2-production.up.railway.app/api/cart/purchase/${user.email}`, {
+            const storedEmail = localStorage.getItem('email');
+            const response = await fetch(`https://backend-mallmart-bd2-production.up.railway.app/api/cart/purchase/${storedEmail}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
