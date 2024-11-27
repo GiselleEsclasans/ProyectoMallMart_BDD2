@@ -14,7 +14,7 @@ function Cart() {
     const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
     return (
-        <div className='Cart'>
+        <div className='Cart min-h-screen flex flex-col'>
             <span className="text-3xl font-bold text-gray-900 dark:text-moradooscuro p-5">Tu Carrito de Productos</span>
             {cart.length === 0 ? (
                 <p>No hay productos en el carrito.</p>
