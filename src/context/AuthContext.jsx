@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
         if (email) {
             try {
                 const token = localStorage.getItem('token');
-                const response = await fetch(`https://backend-mallmart-bd2-production.up.railway.app/api/users/profile/${email}`, {
+                const response = await fetch(`https://backend-mallmart-bd2-production.up.railway.app/api/users/profile`, {
                     headers: {
                         'Authorization': `Bearer ${token}`, 
                         'Content-Type': 'application/json',
@@ -30,6 +30,8 @@ export const AuthProvider = ({ children }) => {
                 }
     
                 const data = await response.json();
+                
+                    
                 setProfileData(data);
             } catch (error) {
                 console.error('Error al cargar los datos del perfil:', error);
@@ -54,6 +56,9 @@ export const AuthProvider = ({ children }) => {
 
             const newUser  = await response.json(); 
             setUser (newUser );
+            localStorage.setItem('email', email ); 
+            localStorage.setItem('name', firstName  + ' ' + lastName ); 
+            localStorage.setItem('address', address );         
             localStorage.setItem('user', JSON.stringify(newUser )); 
         } catch (error) {
             console.error('Error en el registro:', error);
@@ -78,6 +83,7 @@ export const AuthProvider = ({ children }) => {
 
             const loggedInUser  = await response.json(); 
             setUser (loggedInUser );
+            localStorage.setItem('email', email ); 
             localStorage.setItem('user', JSON.stringify(loggedInUser )); 
         } catch (error) {
             console.error('Error en el inicio de sesión:', error);
@@ -89,6 +95,10 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         setUser (null);
         localStorage.removeItem('user'); 
+        localStorage.removeItem('email');
+        localStorage.removeItem('name');
+        localStorage.removeItem('address');
+        
     };
 
     return (
