@@ -19,9 +19,9 @@ function useApi() {
             setProducts(result);
             
         } catch (err) {
-            setError(err.message); // Maneja el error
+            setError(err.message); 
         } finally {
-            setLoading(false); // Asegúrate de establecer loading en false al final
+            setLoading(false); 
         }
     };
 
@@ -32,23 +32,23 @@ function useApi() {
                 throw new Error('Error en la respuesta de la API');
             }
             const result = await response.json();
-            console.log(result);
+            //console.log(result);
             
-            setCategories(result); // Actualiza el estado con las categorías
+            setCategories(result);
         } catch (err) {
-            setError(err.message); // Maneja el error
+            setError(err.message); 
         } finally {
-            setLoading(false); // Asegúrate de establecer loading en false al final
+            setLoading(false); 
         }
     };
 
     useEffect(() => {
-        console.log("Fetching products and categories...");
+        
         getProducts();
         getCategories();
     }, []); 
 
-    return { products, categories, loading, error }; // Devuelve los productos, categorías, estado de carga y errores
+    return { products, categories, loading, error };
 }
 
 export default useApi;

@@ -9,17 +9,17 @@ const Registercard = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [address, setAddress] = useState('');
-    const [error, setError] = useState(null); // Para manejar errores
+    const [error, setError] = useState(null); 
     const navigate = useNavigate(); 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(null); // Reiniciar el error antes de intentar registrar
+        setError(null); 
         try {
             await register({ firstName, lastName, email, password, address }); 
-            navigate('/'); // Redirigir a la página principal
+            navigate('/'); 
         } catch (err) {
-            setError(err.message); // Manejar el error
+            setError(err.message); 
         }
     };
 

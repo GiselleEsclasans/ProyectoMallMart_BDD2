@@ -3,17 +3,13 @@ import { useCart } from '../context/CartContext';
 import ProductcardOnCart from '../components/ProductcardOnCart';
 
 function Cart() {
-    const { cart } = useCart();
+    const { cart, purchase } = useCart();
 
-    // Calcular el costo total
+
     const totalCost = cart.reduce((total, item) => total + (item.product.price * item.quantity), 0);
 
-    // Calcular la cantidad total de productos
-    const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
-    const handleBuy = () => {
-        alert('Compra realizada con éxito!'); 
-    };
+    const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
     return (
         <div className='Cart'>
@@ -31,7 +27,7 @@ function Cart() {
                         <span className="text-2xl font-bold text-gray-900 dark:text-black">Sub total: ${totalCost.toFixed(2)}</span>
                         <span className="text-xl font-bold text-gray-900 dark:text-black">Cantidad total: {totalQuantity}</span>
                         <button 
-                            onClick={handleBuy} 
+                            onClick={purchase} 
                             className="bg-rojoencendido text-white px-4 py-2 rounded"
                         >
                             Comprar
