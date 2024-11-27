@@ -5,8 +5,6 @@ import Miniproductcard from '../components/miniproductcard';
 import Productcard from '../components/productcard';
 import useApi from '../context/useApi';
 
-
-
 function Product() {
     const { productId } = useParams(); 
     const { products, categories, loading, error } = useApi();
@@ -26,19 +24,18 @@ function Product() {
         return <div>Producto no encontrado: {productId}</div>; 
     }
 
+    // Filtrar productos de la misma categoría
+    const relatedProducts = products.filter(p => p.categoryID === product.categoryID && p.productId !== productId);
+
     return (
         <div>
             <span className="text-3xl font-bold text-gray-900 dark:text-moradooscuro p-5">Producto</span>
-            <Productcard product={product} /> {}
-            <div></div>
+            <Productcard product={product} />
             <span className="text-3xl font-bold text-gray-900 dark:text-moradooscuro p-5">Otros Productos</span>
             <div className="flex flex-wrap">
-                {products.slice(0, 5).map(p => (
+                {relatedProducts.slice(0, 5).map(p => (
                     <Miniproductcard key={p.productId} product={p} />
                 ))}
-            </div>
-            <div className="product flex flex-col md:flex-row justify-center items-center">
-                {}
             </div>
             <Categoryfooter categories={categories} />
         </div>
