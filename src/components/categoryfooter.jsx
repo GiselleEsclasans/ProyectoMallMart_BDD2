@@ -22,7 +22,7 @@ const Categoryfooter = ({ categories }) => {
   );
 }
 
-// Definición de PropTypes
+
 Categoryfooter.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,

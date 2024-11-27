@@ -1,18 +1,27 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
 import { FaShoppingCart, FaUser  } from 'react-icons/fa'; 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext'; 
 
 const Productcard = ({ product }) => {
-    const totalStars = 5; // Total de estrellas
+    const totalStars = 5; 
     const filledStars = Math.round(product.rating); 
 
     const { addToCart } = useCart(); 
+    const { user } = useAuth(); 
+    const navigate = useNavigate(); 
 
-    const handleAddToCart = () => {
-        addToCart(product); 
+    const handleAddToCart = (e) => {
+        e.preventDefault(); 
+        if (user) {
+            addToCart(product); 
+            navigate('/carrito'); 
+        } else {
+           
+            navigate('/acceder'); 
+        }
     };
-
 
     return (
         <div className="product flex flex-col md:flex-row justify-center items-center">
@@ -46,7 +55,7 @@ const Productcard = ({ product }) => {
                     <div>
                         {/* Estado (puedes personalizarlo si lo deseas) */}
                         <p className="font-bold mr-4">Estado: Disponible</p>
-                    </div>
+                    </ div>
                     <div>
                         {/* Cantidad del producto */}
                         <p className="font-bold">
@@ -62,18 +71,18 @@ const Productcard = ({ product }) => {
                 </div>
                 <div className="details">
                     {/* Descripción del producto */}
-                    <p className="label font-bold">Descripción:</p> <p className="description border-2 pb-20 rounded-lg">
+                    <p className="label font-bold">Descripción:</p> 
+                    <p className="description border-2 pb-20 rounded-lg">
                         {product.description} {/* Usar la descripción del producto */}
                     </p>
                     <div className="justify-center flex mt-20 mb-20">
                         {/* Botón de Agregar al carrito */}
-                        <Link onClick={() => {scroll(0, 0)}} to={`/carrito`}>
                         <button
                             onClick={handleAddToCart}
                             className="border-2 rounded-lg p-0.5 pl-12 pr-12 text-naranjaunimet transition duration-300 border-naranjaunimet hover:text-moradooscuro hover:bg-naranjaunimet"
                         >
                             + Agregar al carrito
-                        </button></Link>
+                        </button>
                     </div>
                 </div>
             </div>

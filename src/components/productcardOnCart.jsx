@@ -7,8 +7,8 @@ const ProductcardOnCart = ({ item }) => {
     return null; 
   }
 
-  const product = item[0]; // El primer elemento es el objeto del producto
-  const quantity = item[1]; // El segundo elemento es la cantidad
+  const product = item[0]; 
+  const quantity = item[1]; 
   const { removeFromCart, updateQuantity } = useCart();
 
   const handleQuantityChange = (e) => {

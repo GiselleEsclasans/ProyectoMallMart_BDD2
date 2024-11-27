@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types'; 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext'; 
 
 const Productformat2 = ({ product }) => {
   
@@ -13,9 +14,18 @@ const Productformat2 = ({ product }) => {
   const filledStars = Math.round(product.rating); 
 
   const { addToCart } = useCart(); 
+  const { user } = useAuth(); 
+  const navigate = useNavigate(); 
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e) => {
+    e.preventDefault(); 
+    if (user) {
       addToCart(product); 
+      navigate('/carrito'); 
+    } else {
+   
+      navigate('/acceder'); 
+    }
   };
 
   return (
@@ -38,18 +48,14 @@ const Productformat2 = ({ product }) => {
             <div className="flex items-center justify-between">
               <span className="text-3xl font-bold text-gray-900 dark:text-white">${product.price}</span>
             </div>
-            <Link onClick={() => {scroll(0, 0)}} to="/carrito">
-              <button onClick={handleAddToCart} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-rojoapagado dark:hover:bg-rojoencendido dark:focus:bg-moradoclaro">Agregar al carrito</button>
-            </Link>
+            <button onClick={handleAddToCart} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-rojoapagado dark:hover:bg-rojoencendido dark:focus:bg-moradoclar lo">Agregar al carrito</button>
           </div>
-          <img className="p-8 w-96  bg-white rounded-xl" src={product.image} alt={product.name} />
-
+          <img className="p-8 w-96 bg-white rounded-xl" src={product.image} alt={product.name} />
         </div>
       </div>
     </Link>
   );
 }
-
 
 Productformat2.propTypes = {
   product: PropTypes.shape({
@@ -60,8 +66,7 @@ Productformat2.propTypes = {
     name: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
-  }). isRequired,
-
+  }).isRequired,
 };
 
 export default Productformat2;

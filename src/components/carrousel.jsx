@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../img/Foto1.png'; // Make sure to replace this with your actual images
+import logo from '../img/Foto1.png'; 
 import logo1 from '../img/Foto2.png';
 import logo2 from '../img/Foto3.png';
 const images = [

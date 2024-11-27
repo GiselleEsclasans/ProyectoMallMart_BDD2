@@ -5,22 +5,22 @@ import ProductcardOnCart from '../components/productcardOnCart';
 function Cart() {
     const { cart, purchase } = useCart();
 
-    // Asegúrate de que el carrito no esté vacío y que cada item tenga la estructura correcta
+   
     const totalCost = cart.reduce((total, item) => {
-        const product = item[0]; // El primer elemento es el objeto del producto
-        const quantity = item[1]; // El segundo elemento es la cantidad
+        const product = item[0]; 
+        const quantity = item[1]; 
         if (product && product.price) {
             return total + (product.price * quantity);
         }
-        return total; // Si no hay precio, no lo sumes
+        return total; 
     }, 0);
 
     const totalQuantity = cart.reduce((total, item) => {
-        const quantity = item[1]; // El segundo elemento es la cantidad
+        const quantity = item[1]; 
         if (quantity) {
             return total + quantity;
         }
-        return total; // Si no hay cantidad, no la sumes
+        return total; 
     }, 0);
 
     return (

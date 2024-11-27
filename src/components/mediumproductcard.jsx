@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types'; 
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext'; 
 
 const Mediumproductcard = ({ product }) => {
   const totalStars = 5;
@@ -12,9 +13,18 @@ const Mediumproductcard = ({ product }) => {
   }
   
   const { addToCart } = useCart(); 
+  const { user } = useAuth();
+  const navigate = useNavigate(); 
 
-  const handleAddToCart = () => {
-    addToCart(product);
+  const handleAddToCart = (e) => {
+    e.preventDefault(); 
+    if (user) {
+      addToCart(product); 
+      navigate('/carrito'); 
+    } else {
+      
+      navigate('/acceder'); 
+    }
   };
 
   return (
@@ -39,11 +49,10 @@ const Mediumproductcard = ({ product }) => {
             {/* Precio del producto */}
             <span className="text-3xl font-bold text-gray-900 dark:text-white">${product.price}</span>
             {/* Botón de agregar al carrito */}
-            <Link onClick={() => {scroll(0, 0)}} to="/carrito">
             <button onClick={handleAddToCart} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-rojoapagado dark:hover:bg-rojoencendido dark:focus:bg-moradoclaro">Agregar al carrito</button>
-            </Link>
           </div>
-        </div> </Link>
+        </div>
+      </Link>
     </div>
   );
 }
