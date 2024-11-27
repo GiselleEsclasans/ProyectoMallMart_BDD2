@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import logo from '../img/foto.png'; // Make sure to replace this with your actual images
-import logo1 from '../img/tele.jpg';
-import logo2 from '../img/reunion.jpg';
+import logo from '../img/Foto1.png'; // Make sure to replace this with your actual images
+import logo1 from '../img/Foto2.png';
+import logo2 from '../img/Foto3.png';
 const images = [
   { id: 1, src: logo, alt: 'Image 1' },
   { id: 2, src: logo1, alt: 'Image 2' },
