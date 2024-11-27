@@ -29,7 +29,7 @@ const ProductcardOnCart = ({ item }) => {
                 <img className="p-8 rounded-t-lg" src={product.image} alt={product.name} />
                 <div>
                     <h5 className="pr-5 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{product.name}</h5>
-                    <button onClick={() => removeFromCart(product.productId)} className="text-red-500">Eliminar</button>
+                    
                 </div>
                 <span className="text-3xl font-bold text-gray-900 dark:text-white">${(product.price).toFixed(2)}</span>
                 <div className="flex items-center">
